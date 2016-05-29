@@ -1,6 +1,6 @@
 const server = require('./lib/server.js');
 const DB_URI = process.env.DB_URI || 'mongodb://localhost/books';
-const database = require('./lib/database');
+const database = require('./lib/mongoose');
 
 // starting the server
 server.start(err => {
