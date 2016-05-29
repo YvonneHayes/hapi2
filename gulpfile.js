@@ -1,22 +1,25 @@
 var gulp = require('gulp');
-var mocha = require('gulp-mocha');
-var jshint = require('gulp-jshint');
-var stylish = require('jshint-stylish');
+var eslint = require('gulp-eslint');
+var mocha = require('gulp-spawn-mocha');
 
-gulp.task('run-tests', function() {
-  return gulp.src(['./test/testHapiServer.js'], { read: false })
-    .pipe(mocha());
+
+gulp.task( 'lint', () => {
+
+  return gulp.src(['**/*.js','!node_modules/**'])
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
 });
 
-gulp.task('watch-test', function() {
-  gulp.watch(['./lib/*.js', './test/testHapiServer.js'], ['run-tests', 'lint']);
+gulp.task( 'run-tests', () => {
+  return gulp.src('./test/**/*.js', { read: false } )
+        .pipe( mocha({reporter: 'nyan'}) );
 });
 
-gulp.task('lint', function() {
-  return gulp.src(['./lib/*.js','./test/testHapiServer.js'])
-    .pipe(jshint('.jshintrc'))
-    .pipe(jshint.reporter(stylish));
+gulp.task( 'watch-js', function() {
+  gulp.watch( [ '**/*.js', '!node_modules/**' ], [ 'test' ] );
 });
 
-gulp.task('default', ['run-tests']);
-gulp.task('test', ['run-tests', 'watch-test', 'lint']);
+gulp.task( 'test', [ 'lint', 'run-tests' ] );
+
+gulp.task( 'default', [ 'test', 'watch-js' ] );
