@@ -22,6 +22,7 @@
   "dependencies": {
     "body-parser": "^1.15.1",
     "hapi": "^13.4.1",
+    "hapi-mongoose-connect": "^1.0.3",
     "mkdirp": "^0.5.1",
     "mongoose": "^4.4.19"
   },
