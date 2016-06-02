@@ -75,4 +75,16 @@ describe('E2E testing', () => {
     });
   });
 
+  it('DELETS a book from /books', done => {
+    const testRequest = {
+      method: 'DELETE',
+      url: '/books/Jane_Austen'
+    };
+    server.inject(testRequest, res => {
+      assert.equal(res.statusCode, 200);
+      assert.property(res.result, 'deleted');
+      done();
+    });
+  });
+
 });
