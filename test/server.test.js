@@ -62,4 +62,17 @@ describe('E2E testing', () => {
     });
   });
 
+  it('Check if PUT chages rating', done => {
+    const testRequest = {
+      method: 'PUT',
+      url: '/books/Jane_Austen',
+      payload: {rating: 8}
+    };
+    server.inject(testRequest, res => {
+      assert.equal(res.statusCode, 200);
+      assert.equal(res.result.updated.rating, 8);
+      done();
+    });
+  });
+
 });
