@@ -27,13 +27,25 @@ describe('E2E testing', () => {
   });
 
   it('TestData gets posted to /books', done => {
-    const reqOptions = {
+    const testRequest = {
       method: 'POST',
       url: '/books',
       payload: testData
     };
-    server.inject(reqOptions, res => {
+    server.inject(testRequest, res => {
       assert.equal(res.statusCode, 200);
+      done();
+    });
+  });
+
+  it('GETS all the books in the database', done => {
+    const testRequest = {
+      method: 'GET',
+      url: '/books'
+    };
+    server.inject(testRequest, res => {
+      assert.equal(res.statusCode, 200);
+      assert.ok(res.result.length === 1);
       done();
     });
   });
