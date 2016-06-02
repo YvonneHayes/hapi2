@@ -50,4 +50,16 @@ describe('E2E testing', () => {
     });
   });
 
+  it('GETS books by one specific author', done => {
+    const testRequest = {
+      method: 'GET',
+      url: '/books/Jane_Austen'
+    };
+    server.inject(testRequest, res => {
+      assert.equal(res.statusCode, 200);
+      assert.equal(res.result.title, testData.title);
+      done();
+    });
+  });
+
 });
