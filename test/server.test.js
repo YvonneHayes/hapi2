@@ -75,7 +75,7 @@ describe('E2E testing', () => {
     });
   });
 
-  it('DELETS a book from /books', done => {
+  it('DELETES a book from /books', done => {
     const testRequest = {
       method: 'DELETE',
       url: '/books/Jane_Austen'
